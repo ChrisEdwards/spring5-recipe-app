@@ -1,6 +1,7 @@
 package guru.springframework.spring5recipeapp.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,7 +20,7 @@ public class Recipe {
     private String directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @Lob
     private Byte[] image;
@@ -27,8 +28,12 @@ public class Recipe {
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
 
+    public Recipe() {
+        notes.setRecipe(this);
+    }
+
     @OneToOne(cascade = CascadeType.ALL)
-    private Notes notes;
+    private Notes notes = new Notes();
 
     @ManyToMany
     @JoinTable(name = "recipe_category",
@@ -40,103 +45,116 @@ public class Recipe {
         return id;
     }
 
-    public void setId(Long id) {
+    public Recipe setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Recipe setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public Integer getPrepTime() {
         return prepTime;
     }
 
-    public void setPrepTime(Integer prepTime) {
+    public Recipe setPrepTime(Integer prepTime) {
         this.prepTime = prepTime;
+        return this;
     }
 
     public Integer getCookTime() {
         return cookTime;
     }
 
-    public void setCookTime(Integer cookTime) {
+    public Recipe setCookTime(Integer cookTime) {
         this.cookTime = cookTime;
+        return this;
     }
 
     public Integer getServings() {
         return servings;
     }
 
-    public void setServings(Integer servings) {
+    public Recipe setServings(Integer servings) {
         this.servings = servings;
+        return this;
     }
 
     public String getSource() {
         return source;
     }
 
-    public void setSource(String source) {
+    public Recipe setSource(String source) {
         this.source = source;
+        return this;
     }
 
     public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
+    public Recipe setUrl(String url) {
         this.url = url;
+        return this;
     }
 
     public String getDirections() {
         return directions;
     }
 
-    public void setDirections(String directions) {
+    public Recipe setDirections(String directions) {
         this.directions = directions;
-    }
-
-    public Byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(Byte[] image) {
-        this.image = image;
-    }
-
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public Notes getNotes() {
-        return notes;
-    }
-
-    public void setNotes(Notes notes) {
-        this.notes = notes;
+        return this;
     }
 
     public Set<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(Set<Ingredient> ingredients) {
+    public Recipe setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
+        return this;
+    }
+
+    public Byte[] getImage() {
+        return image;
+    }
+
+    public Recipe setImage(Byte[] image) {
+        this.image = image;
+        return this;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public Recipe setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+        return this;
+    }
+
+    public Notes getNotes() {
+        return notes;
+    }
+
+    public Recipe setNotes(Notes notes) {
+        this.notes = notes;
+        return this;
     }
 
     public Set<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(Set<Category> categories) {
+    public Recipe setCategories(Set<Category> categories) {
         this.categories = categories;
+        return this;
     }
 }

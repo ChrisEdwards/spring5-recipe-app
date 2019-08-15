@@ -22,39 +22,44 @@ public class Ingredient {
         return id;
     }
 
-    public void setId(Long id) {
+    public Ingredient setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Ingredient setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public Ingredient setAmount(BigDecimal amount) {
         this.amount = amount;
+        return this;
     }
 
     public UnitOfMeasure getUnitOfMeasure() {
         return unitOfMeasure;
     }
 
-    public void setUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
+    public Ingredient setUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
         this.unitOfMeasure = unitOfMeasure;
+        return this;
     }
 
     public Recipe getRecipe() {
         return recipe;
     }
 
-    public void setRecipe(Recipe recipe) {
+    public Ingredient setRecipe(Recipe recipe) {
         this.recipe = recipe;
+        return this;
     }
 }
