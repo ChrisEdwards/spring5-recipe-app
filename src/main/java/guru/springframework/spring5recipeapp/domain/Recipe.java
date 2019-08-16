@@ -1,7 +1,9 @@
 package guru.springframework.spring5recipeapp.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -11,6 +13,8 @@ import java.util.Set;
 @Data
 @Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Recipe {
 
     @Id
@@ -49,6 +53,9 @@ public class Recipe {
     }
 
     public Recipe addIngredient(Ingredient ingredient) {
+        if (ingredients == null) {
+            ingredients = new HashSet<>();
+        }
         ingredient.setRecipe(this);
         this.ingredients.add(ingredient);
         return this;

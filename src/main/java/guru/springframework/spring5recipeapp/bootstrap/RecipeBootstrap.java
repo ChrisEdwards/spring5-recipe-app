@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
@@ -22,6 +23,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         this.unitOfMeasureRepository = unitOfMeasureRepository;
     }
 
+    @Transactional
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         log.debug("Logging bootstrap data.");
@@ -29,10 +31,10 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     }
 
     private void loadData() {
-        UnitOfMeasure count = unitOfMeasureRepository.findByDescription("Count").get();
-        UnitOfMeasure teaspoon = unitOfMeasureRepository.findByDescription("Teaspoon").get();
-        UnitOfMeasure tablespoon = unitOfMeasureRepository.findByDescription("Tablespoon").get();
-        UnitOfMeasure dash = unitOfMeasureRepository.findByDescription("Dash").get();
+        UnitOfMeasure count = unitOfMeasureRepository.findByDescription("Count").orElseThrow(NullPointerException::new);
+        UnitOfMeasure teaspoon = unitOfMeasureRepository.findByDescription("Teaspoon").orElseThrow(NullPointerException::new);
+        UnitOfMeasure tablespoon = unitOfMeasureRepository.findByDescription("Tablespoon").orElseThrow(NullPointerException::new);
+        UnitOfMeasure dash = unitOfMeasureRepository.findByDescription("Dash").orElseThrow(NullPointerException::new);
 
         Recipe perfectGuacamole = Recipe.builder()
                 .description("Just Do It")
