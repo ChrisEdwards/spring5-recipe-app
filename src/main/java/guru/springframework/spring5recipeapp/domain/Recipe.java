@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +26,8 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
+
+    @Lob
     private String directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
@@ -45,7 +46,7 @@ public class Recipe {
     @JoinTable(name = "recipe_category",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<>();
 
     public void setNotes(Notes notes) {
         this.notes = notes;
@@ -53,20 +54,8 @@ public class Recipe {
     }
 
     public Recipe addIngredient(Ingredient ingredient) {
-        if (ingredients == null) {
-            ingredients = new HashSet<>();
-        }
         ingredient.setRecipe(this);
         this.ingredients.add(ingredient);
         return this;
-    }
-
-    public Recipe addIngredient(String description, double amount, UnitOfMeasure unitOfMeasure) {
-        return addIngredient(Ingredient.builder()
-                .description(description)
-                .amount(BigDecimal.valueOf(amount))
-                .unitOfMeasure(unitOfMeasure)
-                .build()
-        );
     }
 }

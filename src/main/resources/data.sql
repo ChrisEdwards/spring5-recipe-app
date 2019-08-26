@@ -17,8 +17,8 @@ VALUES ('Pinch');
 INSERT INTO unit_of_measure (description)
 VALUES ('Ounce');
 INSERT INTO unit_of_measure (description)
-VALUES ('Clove');
+VALUES ('Each');
 INSERT INTO unit_of_measure (description)
 VALUES ('Dash');
 INSERT INTO unit_of_measure (description)
-VALUES ('Count');
+VALUES ('Pint');
